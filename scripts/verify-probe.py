@@ -14,7 +14,7 @@ EXPECTED = {
           'markers': [('Cue two', 8, 65), ('Local B', 16, 0)]},
 }
 
-def check(record, spec):
+def check(record, spec, phase):
     assert record['realQmlEngine'] is True
     assert record['documentClass'] == 'QQuickTextDocument'
     assert record['text'] == spec['text'], 'Literal Unicode text mismatch'
@@ -31,8 +31,10 @@ def check(record, spec):
             covered.add(i)
             lo, hi, fg, bg, italic = spec['emphasis']
             special = lo <= i < hi
-            assert f['foreground'] == (fg if special else spec['base']), ('Foreground', i, f)
-            assert f['background'] == (bg if special else ''), ('Highlight', i, f)
+            assert f['foreground'] == '#ff' + (fg if special else spec['base'])[1:], ('Foreground/alpha', i, f)
+            on_cue = any(start <= i < start + len(text.encode('utf-16-le'))//2 for text, start, _ in spec['markers'])
+            expected_bg = '#ff' + bg[1:] if special else '#00000000' if phase != 'author' and on_cue else ''
+            assert f['background'] == expected_bg, ('Highlight/alpha', i, f)
             assert f['weight'] == (700 if special else spec['weight']), ('Weight', i, f)
             assert f['italic'] == (italic if special else spec['italic']), ('Italic', i, f)
     assert covered == {i for i in range(len(plain16)//2) if plain16[2*i:2*i+2] != b'\n\0'}
@@ -47,7 +49,7 @@ assert re.search(r'^qprompt\s+2\.0\.2\s*$', packages, re.M), 'Installed package 
 for label, expected in EXPECTED.items():
     for phase in ['author', 'loaded', 'reloaded']:
         filename = f'{label}.html.author.json' if phase == 'author' else f'{label}-{phase}.json'
-        check(json.loads((ART / filename).read_text()), expected)
+        check(json.loads((ART / filename).read_text()), expected, phase)
         reports.append({'script': label, 'phase': phase, 'literalTextStyleAndMarkers': 'PASS'})
     html = (ART / f'{label}.html').read_text()
     assert 'qrichtext' in html and 'key_65' in html

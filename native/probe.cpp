@@ -75,8 +75,8 @@ Item {
                 const auto font = fmt.font().resolve(doc->defaultFont());
                 fragments.append(QJsonObject{{"position", f.position()}, {"text", f.text()},
                     {"weight", int(font.weight())}, {"italic", font.italic()},
-                    {"foreground", fmt.foreground().color().name(QColor::HexRgb)},
-                    {"background", fmt.background().style() == Qt::NoBrush ? QString() : fmt.background().color().name(QColor::HexRgb)},
+                    {"foreground", fmt.foreground().color().name(QColor::HexArgb)},
+                    {"background", fmt.background().style() == Qt::NoBrush ? QString() : fmt.background().color().name(QColor::HexArgb)},
                     {"anchor", fmt.isAnchor()}, {"href", fmt.anchorHref()},
                     {"names", QJsonArray::fromStringList(fmt.anchorNames())}});
             }
