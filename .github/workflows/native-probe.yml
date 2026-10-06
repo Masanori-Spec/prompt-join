@@ -1,0 +1,48 @@
+name: Official QPrompt component compatibility probe
+on: [push, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  qprompt-probe:
+    runs-on: ubuntu-24.04
+    container: debian:13-slim
+    timeout-minutes: 15
+    env:
+      QPROMPT_TEMP: /tmp/promptjoin-official
+      QT_QPA_PLATFORM: xcb
+      QT_QUICK_BACKEND: software
+    steps:
+      - uses: actions/checkout@v4
+      - name: Standard Debian 13 build and Qt runtime packages
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends ca-certificates python3 cmake g++ qt6-base-dev qt6-declarative-dev qml6-module-qtquick qml6-module-qtqml-workerscript xvfb xauth fonts-dejavu-core
+      - name: Verify primary release metadata and exact official bytes
+        run: python3 scripts/fetch-consumer.py
+      - name: Install verified official DEB and record actual version
+        run: |
+          apt-get install -y --no-install-recommends "$QPROMPT_TEMP/QPrompt-2.0.2-x86_64-Linux.deb"
+          dpkg-query -W qprompt libqt6core6t64 libkf6coreaddons6 libkirigami6 libvulkan-dev > artifacts/native/runtime-packages.txt
+          ldd /usr/bin/qprompt > artifacts/native/official-binary-libraries.txt
+          if grep -q 'not found' artifacts/native/official-binary-libraries.txt; then exit 1; fi
+          xvfb-run -a timeout 30 /usr/bin/qprompt --version > artifacts/native/official-version.txt 2>&1
+      - name: Build only the unchanged native handler components
+        run: |
+          cmake -S native -B build -DQPROMPT_SOURCE="$QPROMPT_TEMP/src" -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --parallel 2
+      - name: Native authored fixtures, real engine load, save and fresh process reload
+        run: |
+          xvfb-run -a timeout 30 build/promptjoin-probe author A "$PWD/artifacts/native/a.html" > artifacts/native/a-author.log 2>&1
+          xvfb-run -a timeout 30 build/promptjoin-probe author B "$PWD/artifacts/native/b.html" > artifacts/native/b-author.log 2>&1
+          xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/a.html" "$PWD/artifacts/native/a-loaded.json" "$PWD/artifacts/native/a-roundtrip.html" > artifacts/native/a-loaded.log 2>&1
+          xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/b.html" "$PWD/artifacts/native/b-loaded.json" "$PWD/artifacts/native/b-roundtrip.html" > artifacts/native/b-loaded.log 2>&1
+          xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/a-roundtrip.html" "$PWD/artifacts/native/a-reloaded.json" > artifacts/native/a-reloaded.log 2>&1
+          xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/b-roundtrip.html" "$PWD/artifacts/native/b-reloaded.json" > artifacts/native/b-reloaded.log 2>&1
+          python3 scripts/verify-probe.py
+      - name: Retain original fixture evidence, never vendor source or binaries
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: promptjoin-native-probe
+          path: artifacts/native/
+          if-no-files-found: error
