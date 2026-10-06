@@ -41,7 +41,9 @@ def check(record, spec):
 
 reports = []
 version = (ART / 'official-version.txt').read_text()
-assert re.search(r'\b2\.0\.2\b', version), 'Official binary did not report pinned version'
+assert re.search(r'^QPrompt\s*$', version, re.M), 'Official binary version command did not identify QPrompt'
+packages = (ART / 'runtime-packages.txt').read_text()
+assert re.search(r'^qprompt\s+2\.0\.2\s*$', packages, re.M), 'Installed package version differs from pinned release'
 for label, expected in EXPECTED.items():
     for phase in ['author', 'loaded', 'reloaded']:
         filename = f'{label}.html.author.json' if phase == 'author' else f'{label}-{phase}.json'
@@ -54,6 +56,7 @@ body_b = re.search(r'<body[^>]*>', (ART/'b.html').read_text()).group()
 assert body_a != body_b, 'Fixture must exercise distinct native body defaults'
 report = {'status': 'PASS', 'scope': 'Compatibility probe only; joined output and fault controls are not yet tested',
           'officialBinaryVersionOutput': version,
+          'versionCaveat': 'The pinned binary prints its name but no version number for --version; package metadata and release SHA-256 identify 2.0.2',
           'checks': reports, 'distinctNativeBodyDefaults': [body_a, body_b],
           'nativeLengthRoleNotUsed': 'Upstream LengthRole returns position; oracle uses text and UTF-16 positions'}
 (ART / 'probe-report.json').write_text(json.dumps(report, indent=2, ensure_ascii=False) + '\n')
