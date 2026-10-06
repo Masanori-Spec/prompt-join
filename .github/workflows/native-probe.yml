@@ -16,7 +16,7 @@ jobs:
       - name: Standard Debian 13 build and Qt runtime packages
         run: |
           apt-get update
-          apt-get install -y --no-install-recommends ca-certificates python3 cmake g++ qt6-base-dev qt6-declarative-dev qml6-module-qtquick qml6-module-qtqml-workerscript xvfb xauth fonts-dejavu-core
+          apt-get install -y --no-install-recommends ca-certificates python3 cmake make g++ qt6-base-dev qt6-declarative-dev qml6-module-qtquick qml6-module-qtqml-workerscript xvfb xauth fonts-dejavu-core
       - name: Verify primary release metadata and exact official bytes
         run: python3 scripts/fetch-consumer.py
       - name: Install verified official DEB and record actual version
