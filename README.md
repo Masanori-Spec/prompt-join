@@ -1,9 +1,9 @@
-# PromptJoin: source-only native joining gate
+# PromptJoin
 
-This is a source-only feasibility implementation of an offline joiner of supported
-QPrompt-native HTML scripts. There is no product UI or completed merge
-compatibility claim yet. The initial native component compatibility probe passed;
-the current gate must prove the joiner's own output and intentional fault controls.
+An offline joiner of supported QPrompt-native HTML scripts. The source/API
+joining gate has passed, including native save/reload and intentional faults.
+The standalone UI in `dist/prompt-join.html` is a candidate awaiting its own
+actual-browser-download and visual/native acceptance.
 
 The first hosted gate checks the official QPrompt 2.0.2 Debian package and a small
 harness that compiles its unchanged DocumentHandler, MarkersModel and font-dialog
@@ -46,6 +46,7 @@ fragments. The receipt discloses removed size/spacing declarations and source/cu
 mapping. Only semantic text, supported styling and local cue behavior are tested.
 
 See [the verified component checkpoint](docs/native-checkpoint.md) and
+[the accepted joining checkpoint](docs/native-join-checkpoint.md), plus
 [the need and comparison](docs/research.md). Run `npm ci --ignore-scripts` and
 `npm test` for local core checks; Qt execution remains in hosted CI.
 
@@ -54,3 +55,18 @@ Upstream ownership and license information is recorded in
 [the consumer notice](docs/consumer-notice.md).
 The parser dependencies' existing notices are retained separately in
 [third-party notices](docs/third-party-notices.txt).
+
+## Offline UI candidate
+
+Open `dist/prompt-join.html` locally, choose all input scripts, arrange their
+reading order and confirm it. Review each repeated shortcut explicitly. Remap,
+clear or retain it; retained duplicates show the native first-match warning.
+The preview uses only text nodes and validated styles. No imported HTML is
+executed or fetched. Save a new HTML copy and its hash/decision receipt.
+
+Japanese/English, keyboard order controls, mobile cue-table scrolling, print
+review, bounded previews, stale async cancellation and clean offline reopening
+are covered by the new hosted browser test plan. Those runtime/visual results
+remain pending until its workflow passes. All five actual browser HTML downloads
+are then passed unchanged to the same native loader/save/fresh-reload gate;
+the prototype generator does not replace them. The UI has a 100-cue review limit.

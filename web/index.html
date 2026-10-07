@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>PromptJoin — scripts in one reading order</title>
+    <style>
+      /* APP_CSS */
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#workspace" data-i18n="skip">作業エリアへ</a>
+    <header class="topbar">
+      <a class="brand" href="#"
+        ><span aria-hidden="true" class="brand-mark">↳</span>PromptJoin</a
+      >
+      <div class="language" aria-label="Language">
+        <button id="lang-ja" type="button" lang="ja" aria-pressed="true">
+          日本語</button
+        ><button id="lang-en" type="button" lang="en" aria-pressed="false">
+          EN
+        </button>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">A CONTINUOUS READ</p>
+          <h1 data-i18n="headline">原稿をつなぐ。<br />合図は、迷わせない。</h1>
+          <p class="lede" data-i18n="intro">
+            QPrompt で保存した HTML
+            を、読む順に。色や強調を確認し、重複するショートカットを整理して、ひとつのコピーにまとめます。
+          </p>
+        </div>
+        <aside class="hero-note">
+          <span class="pill" data-i18n="offlineTag"
+            >OFFLINE · 端末内で処理</span
+          >
+          <p data-i18n="boundary">
+            対応するテキストと書式だけを扱います。画像・表・Office
+            文書・自動実行マーカーは対象外です。
+          </p>
+          <small data-i18n="nativeTag"
+            >QPrompt 2.0.2 公式コンポーネントで検証</small
+          >
+        </aside>
+      </section>
+      <section id="workspace" tabindex="-1" aria-label="Workspace">
+        <div class="section-heading">
+          <p class="eyebrow" data-i18n="workspace">READING DESK</p>
+          <div class="toolbar">
+            <button id="sample" class="quiet" type="button" data-i18n="sample">
+              サンプルを試す</button
+            ><button id="clear" class="quiet" type="button" data-i18n="clear">
+              クリア
+            </button>
+          </div>
+        </div>
+        <div class="desk-grid">
+          <section class="card input-card">
+            <h2>
+              <span class="step">01</span
+              ><span data-i18n="chooseTitle">原稿と順序を選ぶ</span>
+            </h2>
+            <label class="file-zone"
+              ><span class="upload-icon" aria-hidden="true">＋</span
+              ><strong data-i18n="chooseFiles">HTML 原稿を選ぶ</strong
+              ><span data-i18n="chooseHint">2〜12 ファイル · .html / .htm</span
+              ><input
+                id="files"
+                type="file"
+                accept=".html,.htm"
+                multiple
+                aria-label="HTML 原稿を選ぶ"
+            /></label>
+            <p class="hint" data-i18n="replaceHint">
+              必要な原稿をまとめて選択します。再選択すると、現在の一覧を置き換えます。
+            </p>
+            <div id="file-summary" class="file-summary" data-i18n="noFiles">
+              まだ選択されていません
+            </div>
+            <ol id="order-list" aria-label="Reading order"></ol>
+            <label class="confirm-order"
+              ><input id="confirm-order" type="checkbox" disabled /><span
+                data-i18n="confirmOrder"
+                >この読む順序を確認した</span
+              ></label
+            >
+            <details class="limits">
+              <summary data-i18n="formats">対応形式と上限</summary>
+              <p data-i18n="formatDetails">
+                QPrompt のネイティブ HTML：段落、平坦な span 書式、A–Z / 0–9
+                のキー、通常のローカル合図。1 ファイル 2 MiB、合計 12
+                MiB、テキスト 200,000 UTF-16 単位まで。この画面では合図 100
+                個まで扱います。
+              </p>
+              <p data-i18n="sizeDetails">
+                文字サイズや間隔は QPrompt の読み込みで正規化されます。任意の
+                HTML や完全なレイアウト保持には対応しません。
+              </p>
+            </details>
+          </section>
+          <section class="card cue-card">
+            <h2>
+              <span class="step">02</span
+              ><span data-i18n="cueTitle">ショートカットを確認する</span>
+            </h2>
+            <div
+              id="status"
+              class="status"
+              role="status"
+              aria-live="polite"
+            ></div>
+            <div id="error-detail" hidden>
+              <details>
+                <summary data-i18n="detail">互換性の詳細</summary>
+                <p id="error-text"></p>
+              </details>
+            </div>
+            <p id="cue-hint" class="hint" data-i18n="cueHint">
+              同じキーが重複すると、QPrompt
+              は先頭の合図だけに移動します。変更・解除・そのまま保持を、合図ごとに選んでください。
+            </p>
+            <div id="cue-choices"></div>
+            <div id="cue-empty" class="empty">
+              <div class="paper-stack" aria-hidden="true">
+                <span>A</span><span>B</span><span>↳</span>
+              </div>
+              <p data-i18n="emptyCues">原稿の合図がここに並びます</p>
+              <small data-i18n="localOnly"
+                >外部リンクや自動実行マーカーは読み込みません</small
+              >
+            </div>
+          </section>
+        </div>
+        <section id="review" class="card review-card" hidden>
+          <div class="review-heading">
+            <h2>
+              <span class="step">03</span
+              ><span data-i18n="reviewTitle">つなぐ内容を確認する</span>
+            </h2>
+            <span class="pill" data-i18n="copyOnly"
+              >元ファイルは変更しません</span
+            >
+          </div>
+          <p id="reading-order" class="reading-order"></p>
+          <div class="metrics">
+            <div>
+              <strong id="script-count">0</strong
+              ><span data-i18n="scriptsMetric">原稿</span>
+            </div>
+            <div>
+              <strong id="cue-count">0</strong
+              ><span data-i18n="cuesMetric">合図</span>
+            </div>
+            <div>
+              <strong id="text-count">0</strong
+              ><span data-i18n="unitsMetric">UTF-16 単位</span>
+            </div>
+          </div>
+          <div id="retained-warning" class="warning" hidden></div>
+          <p class="hint" data-i18n="positionsHint">
+            位置は QPrompt と同じ UTF-16 単位です。原稿の境界には段落区切りを 1
+            つ入れます。
+          </p>
+          <div class="table-wrap" tabindex="0" aria-label="Cue positions">
+            <table>
+              <caption data-i18n="tableCaption">
+                出力される合図と位置
+              </caption>
+              <thead>
+                <tr>
+                  <th data-i18n="fileCol">原稿</th>
+                  <th data-i18n="cueCol">合図</th>
+                  <th data-i18n="keyCol">キー</th>
+                  <th data-i18n="sourceCol">元の位置</th>
+                  <th data-i18n="joinedCol">結合後の位置</th>
+                </tr>
+              </thead>
+              <tbody id="cue-table"></tbody>
+            </table>
+          </div>
+          <div class="export-bar">
+            <div>
+              <h3 data-i18n="exportTitle">QPrompt で開けるコピー</h3>
+              <p data-i18n="exportHint">
+                確認した順序・書式・合図を、新しい HTML として保存します。
+              </p>
+              <small data-i18n="receiptHint"
+                >検証記録には、入力と出力のハッシュ・キーの判断・位置・正規化したサイズ指定を残します。</small
+              >
+            </div>
+            <div class="export-actions">
+              <button
+                id="export"
+                class="primary"
+                type="button"
+                disabled
+                data-i18n="export"
+              >
+                結合 HTML を保存</button
+              ><button id="receipt" type="button" disabled data-i18n="receipt">
+                検証記録 · JSON</button
+              ><button id="print" type="button" disabled data-i18n="print">
+                確認内容を印刷
+              </button>
+            </div>
+          </div>
+          <p id="download-status" class="download-status"></p>
+        </section>
+        <section id="preview-section" class="card preview-card" hidden>
+          <div class="review-heading">
+            <div>
+              <p class="eyebrow" data-i18n="previewEyebrow">TEXT REVIEW</p>
+              <h2 id="preview-title" data-i18n="previewTitle">
+                テキストのプレビュー
+              </h2>
+            </div>
+            <div class="preview-controls">
+              <label
+                ><span class="sr-only" data-i18n="previewSource"
+                  >プレビューする原稿</span
+                ><select id="preview-source"></select></label
+              ><button id="preview-theme" type="button" data-i18n="darkCanvas">
+                背景を暗くする
+              </button>
+            </div>
+          </div>
+          <p id="preview-caption" class="hint"></p>
+          <div id="preview" class="script-preview"></div>
+        </section>
+        <section class="footnotes">
+          <div>
+            <h3 data-i18n="scopeTitle">原稿をまとめる、小さな道具。</h3>
+            <p data-i18n="scopeText">
+              一般的な HTML 変換や Office
+              取り込みは行いません。未対応の要素は黙って削除せず、書き出しを止めます。
+            </p>
+          </div>
+          <div>
+            <h3 data-i18n="nativeTitle">合図の動作まで、確かめる。</h3>
+            <p data-i18n="nativeText">
+              公式の読み込み・マーカー処理で、元の合図と変更後のキーを検証しています。QPrompt
+              の保存では HTML の構造が正規化されることがあります。
+            </p>
+          </div>
+        </section>
+      </section>
+    </main>
+    <footer>
+      <span data-i18n="tagline"
+        >PromptJoin · Keep the reading order. Keep the cues.</span
+      ><button id="offline" type="button" class="quiet" data-i18n="saveTool">
+        この道具をオフライン保存
+      </button>
+    </footer>
+    <details class="third-party">
+      <summary>Third-party notices</summary>
+      <pre>/* THIRD_PARTY */</pre>
+    </details>
+    <script>
+      /* APP_JS */
+    </script>
+  </body>
+</html>

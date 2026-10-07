@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Independent literal native text, formatting, cue and fault oracle."""
 from pathlib import Path
-import hashlib, json
+import hashlib, json, os
 
 ROOT = Path(__file__).resolve().parents[1]
 ART = ROOT/'artifacts/native'
@@ -86,7 +86,9 @@ for mode in ['joined','reversed','cleared','resaved-inputs','duplicate']:
     assert [(c['text'],c['positionUTF16'],c['key']) for c in receipt['cues']]==expected
     assert receipt['order']==([1,0] if mode=='reversed' else [0,1])
     assert bool(receipt['retainedConflicts'])==(mode=='duplicate')
-report={'status':'PASS','scope':'Source-only join prototype in unchanged official QPrompt components with real Qt Quick objects; browser output not tested',
+browser_origin=os.environ.get('PROMPTJOIN_BROWSER_INPUT')=='1'
+report={'status':'PASS','scope':'Actual browser downloads in unchanged official QPrompt components with real Qt Quick objects' if browser_origin else 'Source-only join prototype in unchanged official QPrompt components with real Qt Quick objects; browser output not tested',
+        'inputOrigin':'actual browser UI downloads' if browser_origin else 'source-only core prototype',
         'checks':rows,'sourceFilesByteUnchanged':True,'negativeInputsAreExactSingleFaults':True,
         'duplicateControl':'Two key65 markers remain; native keySearch65 always returns the first at14 from all four tested cursor positions',
         'remappedControl':'Native keySearch65 returns14 and keySearch66 returns44, including fresh process after native save',
