@@ -1,0 +1,11 @@
+{
+  "name": "prompt-join",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "description": "Bounded offline joiner for supported QPrompt-native text HTML",
+  "engines": { "node": ">=22" },
+  "scripts": { "test": "node --test test/*.test.mjs" },
+  "dependencies": { "parse5": "7.3.0" }
+}

@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QColor>
 #include <QFile>
+#include <QFontInfo>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -74,7 +75,9 @@ Item {
                 const auto fmt = f.charFormat();
                 const auto font = fmt.font().resolve(doc->defaultFont());
                 fragments.append(QJsonObject{{"position", f.position()}, {"text", f.text()},
+                    {"family", font.family()}, {"resolvedFamily", QFontInfo(font).family()},
                     {"weight", int(font.weight())}, {"italic", font.italic()},
+                    {"underline", font.underline()}, {"overline", font.overline()}, {"strike", font.strikeOut()},
                     {"foreground", fmt.foreground().color().name(QColor::HexArgb)},
                     {"background", fmt.background().style() == Qt::NoBrush ? QString() : fmt.background().color().name(QColor::HexArgb)},
                     {"anchor", fmt.isAnchor()}, {"href", fmt.anchorHref()},

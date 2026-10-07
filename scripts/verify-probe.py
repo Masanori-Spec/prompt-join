@@ -7,10 +7,10 @@ ROOT = Path(__file__).resolve().parents[1]
 ART = ROOT / 'artifacts/native'
 EXPECTED = {
     'a': {'text': 'Alpha café 🌟\nCue one\nLocal A\nEnd A', 'base': '#203040',
-          'weight': 400, 'italic': False, 'emphasis': [6, 10, '#cc2244', '#fff080', True],
+          'family': 'DejaVu Sans', 'weight': 400, 'italic': False, 'emphasis': [6, 10, '#cc2244', '#fff080', True],
           'markers': [('Cue one', 14, 65), ('Local A', 22, 0)]},
     'b': {'text': 'Beta 東京\nCue two\nLocal B\nEnd B', 'base': '#405060',
-          'weight': 600, 'italic': True, 'emphasis': [5, 7, '#1266aa', '#aaffcc', False],
+          'family': 'DejaVu Serif', 'weight': 600, 'italic': True, 'emphasis': [5, 7, '#1266aa', '#aaffcc', False],
           'markers': [('Cue two', 8, 65), ('Local B', 16, 0)]},
 }
 
@@ -25,6 +25,7 @@ def check(record, spec, phase):
     covered = set()
     for f in record['fragments']:
         length = len(f['text'].encode('utf-16-le')) // 2
+        assert f['family'] == spec['family'] and f['resolvedFamily'] == spec['family'], ('Font family', f)
         assert plain16[2*f['position']:2*(f['position']+length)].decode('utf-16-le') == f['text']
         for i in range(f['position'], f['position'] + length):
             assert i not in covered
@@ -35,6 +36,7 @@ def check(record, spec, phase):
             on_cue = any(start <= i < start + len(text.encode('utf-16-le'))//2 for text, start, _ in spec['markers'])
             expected_bg = '#ff' + bg[1:] if special else '#00000000' if phase != 'author' and on_cue else ''
             assert f['background'] == expected_bg, ('Highlight/alpha', i, f)
+            assert f['underline'] == on_cue and f['overline'] == on_cue and f['strike'] is False, ('Decoration', i, f)
             assert f['weight'] == (700 if special else spec['weight']), ('Weight', i, f)
             assert f['italic'] == (italic if special else spec['italic']), ('Italic', i, f)
     assert covered == {i for i in range(len(plain16)//2) if plain16[2*i:2*i+2] != b'\n\0'}

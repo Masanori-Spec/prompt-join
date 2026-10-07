@@ -1,0 +1,33 @@
+{
+  "authoring": "Original fixture text authored through unchanged official DocumentHandler/Qt APIs, saved by DocumentHandler::saveAs; roundtrip files saved after its original load",
+  "sourceCommit": "a784c945d76906bfe7cc674ba1f72a34a3567107",
+  "run": 37547990076,
+  "artifact": 11451099903,
+  "artifactSHA256": "6690b95d38b39ae43544195befc5d4f21f57583df86e223a7c529ab30a973ac1",
+  "files": [
+    {
+      "path": "test/fixtures/a.html",
+      "artifactMember": "a.html",
+      "bytes": 1411,
+      "sha256": "f7126d461efadbc617638923c315cb8893a2ea73b9715eb4766fe84bc42f57cc"
+    },
+    {
+      "path": "test/fixtures/b.html",
+      "artifactMember": "b.html",
+      "bytes": 1370,
+      "sha256": "d08f8adeacaae148680b92b207c51997663ff46e658ea5e131e228f3713a22de"
+    },
+    {
+      "path": "test/fixtures/a-roundtrip.html",
+      "artifactMember": "a-roundtrip.html",
+      "bytes": 1762,
+      "sha256": "6891e3984998bdc2467bb3a41ce8772240dd05ba5da3be1ae5d1030606b5c885"
+    },
+    {
+      "path": "test/fixtures/b-roundtrip.html",
+      "artifactMember": "b-roundtrip.html",
+      "bytes": 1860,
+      "sha256": "ed3892c6aa53b79d6fdb5bfb1cd2bc8a71747ec3e13005a50a8a66db0c59b089"
+    }
+  ]
+}
