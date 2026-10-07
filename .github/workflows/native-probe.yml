@@ -1,4 +1,4 @@
-name: Official QPrompt component compatibility probe
+name: Official QPrompt native joining and fault controls
 on: [push, workflow_dispatch]
 permissions:
   contents: read
@@ -19,6 +19,13 @@ jobs:
           apt-get install -y --no-install-recommends ca-certificates python3 cmake make g++ qt6-base-dev qt6-declarative-dev qml6-module-qtquick qml6-module-qtqml-workerscript xvfb xauth fonts-dejavu-core
       - name: Verify primary release metadata and exact official bytes
         run: python3 scripts/fetch-consumer.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test bounded native HTML joining core
+        run: |
+          npm ci --ignore-scripts
+          npm test
       - name: Install verified official DEB and record actual version
         run: |
           apt-get install -y --no-install-recommends "$QPROMPT_TEMP/QPrompt-2.0.2-x86_64-Linux.deb"
@@ -39,6 +46,15 @@ jobs:
           xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/a-roundtrip.html" "$PWD/artifacts/native/a-reloaded.json" > artifacts/native/a-reloaded.log 2>&1
           xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/b-roundtrip.html" "$PWD/artifacts/native/b-reloaded.json" > artifacts/native/b-reloaded.log 2>&1
           python3 scripts/verify-probe.py
+      - name: Join actual native fixture bytes and create exact fault controls
+        run: node scripts/prepare-join.mjs
+      - name: Joined output in unchanged native loader, save and fresh process
+        run: |
+          for mode in joined reversed cleared resaved-inputs duplicate wrong-color wrong-text; do
+            xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/$mode.html" "$PWD/artifacts/native/$mode-loaded.json" "$PWD/artifacts/native/$mode-roundtrip.html" > "artifacts/native/$mode-loaded.log" 2>&1
+            xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/$mode-roundtrip.html" "$PWD/artifacts/native/$mode-reloaded.json" > "artifacts/native/$mode-reloaded.log" 2>&1
+          done
+          python3 scripts/verify-join.py
       - name: Retain original fixture evidence, never vendor source or binaries
         if: always()
         uses: actions/upload-artifact@v4
