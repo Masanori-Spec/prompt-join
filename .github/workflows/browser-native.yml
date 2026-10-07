@@ -1,0 +1,94 @@
+name: Offline browser downloads in official QPrompt components
+on: [push, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install standard fonts and PDF inspection tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk poppler-utils
+          npm ci --ignore-scripts
+      - name: Core tests and exact standalone build
+        run: |
+          npm run verify
+          git diff --exit-code -- dist/prompt-join.html
+      - name: Actual sandboxed offline browser downloads and review flows
+        env:
+          CHROMIUM_PATH: /usr/bin/google-chrome
+        run: npm run test:browser
+      - name: Preserve browser downloads and visual proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: promptjoin-browser-downloads
+          path: |
+            artifacts/browser/
+            dist/prompt-join.html
+          if-no-files-found: error
+  native:
+    needs: browser
+    runs-on: ubuntu-24.04
+    container: debian:13-slim
+    timeout-minutes: 15
+    env:
+      QPROMPT_TEMP: /tmp/promptjoin-official
+      QT_QPA_PLATFORM: xcb
+      QT_QUICK_BACKEND: software
+      PROMPTJOIN_BROWSER_INPUT: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: promptjoin-browser-downloads
+          path: downloaded-browser
+      - name: Standard Debian 13 Qt and build packages
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends ca-certificates python3 cmake make g++ qt6-base-dev qt6-declarative-dev qml6-module-qtquick qml6-module-qtqml-workerscript xvfb xauth fonts-dejavu-core
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify and install the exact official consumer
+        run: |
+          python3 scripts/fetch-consumer.py
+          apt-get install -y --no-install-recommends "$QPROMPT_TEMP/QPrompt-2.0.2-x86_64-Linux.deb"
+          dpkg-query -W qprompt libqt6core6t64 libkf6coreaddons6 libkirigami6 libvulkan-dev > artifacts/native/runtime-packages.txt
+          ldd /usr/bin/qprompt > artifacts/native/official-binary-libraries.txt
+          if grep -q 'not found' artifacts/native/official-binary-libraries.txt; then exit 1; fi
+          xvfb-run -a timeout 30 /usr/bin/qprompt --version > artifacts/native/official-version.txt 2>&1
+          cmake -S native -B build -DQPROMPT_SOURCE="$QPROMPT_TEMP/src" -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --parallel 2
+      - name: Re-author and verify independent original native inputs
+        run: |
+          xvfb-run -a timeout 30 build/promptjoin-probe author A "$PWD/artifacts/native/a.html" > artifacts/native/a-author.log 2>&1
+          xvfb-run -a timeout 30 build/promptjoin-probe author B "$PWD/artifacts/native/b.html" > artifacts/native/b-author.log 2>&1
+          xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/a.html" "$PWD/artifacts/native/a-loaded.json" "$PWD/artifacts/native/a-roundtrip.html" > artifacts/native/a-loaded.log 2>&1
+          xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/b.html" "$PWD/artifacts/native/b-loaded.json" "$PWD/artifacts/native/b-roundtrip.html" > artifacts/native/b-loaded.log 2>&1
+          xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/a-roundtrip.html" "$PWD/artifacts/native/a-reloaded.json" > artifacts/native/a-reloaded.log 2>&1
+          xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/b-roundtrip.html" "$PWD/artifacts/native/b-reloaded.json" > artifacts/native/b-reloaded.log 2>&1
+          python3 scripts/verify-probe.py
+      - name: Route actual browser bytes and run the unchanged native assertions
+        run: |
+          node scripts/prepare-browser-join.mjs
+          for mode in joined reversed cleared resaved-inputs duplicate wrong-color wrong-text; do
+            xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/$mode.html" "$PWD/artifacts/native/$mode-loaded.json" "$PWD/artifacts/native/$mode-roundtrip.html" > "artifacts/native/$mode-loaded.log" 2>&1
+            xvfb-run -a timeout 30 build/promptjoin-probe inspect "$PWD/artifacts/native/$mode-roundtrip.html" "$PWD/artifacts/native/$mode-reloaded.json" > "artifacts/native/$mode-reloaded.log" 2>&1
+          done
+          python3 scripts/verify-join.py
+      - name: Retain actual browser and native proof without vendor source/binaries
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: promptjoin-browser-native-proof
+          path: |
+            artifacts/native/
+            downloaded-browser/
+          if-no-files-found: error
