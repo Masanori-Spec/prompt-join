@@ -1,0 +1,114 @@
+{
+  "format": "PromptJoin receipt v1",
+  "positionUnit": "UTF-16 code units",
+  "sources": [
+    {
+      "inputIndex": 0,
+      "name": "private-a.html",
+      "bytes": 1411,
+      "startUTF16": 0,
+      "lengthUTF16": 35,
+      "normalizedSizeDeclarations": [
+        {
+          "property": "font-size",
+          "value": "24pt"
+        }
+      ]
+    },
+    {
+      "inputIndex": 1,
+      "name": "private-b.html",
+      "bytes": 1370,
+      "startUTF16": 36,
+      "lengthUTF16": 29,
+      "normalizedSizeDeclarations": [
+        {
+          "property": "font-size",
+          "value": "36pt"
+        }
+      ]
+    }
+  ],
+  "order": [
+    0,
+    1
+  ],
+  "cues": [
+    {
+      "inputIndex": 0,
+      "cue": "0:0",
+      "text": "Cue one",
+      "sourcePositionUTF16": 14,
+      "positionUTF16": 14,
+      "beforeKey": 65,
+      "key": 65
+    },
+    {
+      "inputIndex": 0,
+      "cue": "0:1",
+      "text": "Local A",
+      "sourcePositionUTF16": 22,
+      "positionUTF16": 22,
+      "beforeKey": 0,
+      "key": 0
+    },
+    {
+      "inputIndex": 1,
+      "cue": "1:0",
+      "text": "Cue two",
+      "sourcePositionUTF16": 8,
+      "positionUTF16": 44,
+      "beforeKey": 65,
+      "key": 66
+    },
+    {
+      "inputIndex": 1,
+      "cue": "1:1",
+      "text": "Local B",
+      "sourcePositionUTF16": 16,
+      "positionUTF16": 52,
+      "beforeKey": 0,
+      "key": 0
+    }
+  ],
+  "shortcutDecisions": [
+    {
+      "cue": "0:0",
+      "label": "Cue one",
+      "before": 65,
+      "after": 65,
+      "action": "retain",
+      "explicit": true
+    },
+    {
+      "cue": "1:0",
+      "label": "Cue two",
+      "before": 65,
+      "after": 66,
+      "action": "remap",
+      "explicit": true
+    }
+  ],
+  "retainedConflicts": [],
+  "outputBytes": 2268,
+  "inputFilesUnchanged": true,
+  "scope": "Supported native text/color/emphasis/local-marker subset; no exact font-size or arbitrary HTML compatibility claim",
+  "inputHashes": [
+    "f7126d461efadbc617638923c315cb8893a2ea73b9715eb4766fe84bc42f57cc",
+    "d08f8adeacaae148680b92b207c51997663ff46e658ea5e131e228f3713a22de"
+  ],
+  "outputSHA256": "c9587c329522aec6a423e76f311eaddf3056695e366c596e28f964a9c6b417e4",
+  "inputs": [
+    {
+      "name": "private-a.html",
+      "bytes": 1411,
+      "sha256": "f7126d461efadbc617638923c315cb8893a2ea73b9715eb4766fe84bc42f57cc"
+    },
+    {
+      "name": "private-b.html",
+      "bytes": 1370,
+      "sha256": "d08f8adeacaae148680b92b207c51997663ff46e658ea5e131e228f3713a22de"
+    }
+  ],
+  "exportOrigin": "browser UI download"
+}

@@ -1,0 +1,99 @@
+{
+  "status": "PASS",
+  "scope": "Actual browser downloads in unchanged official QPrompt components with real Qt Quick objects",
+  "inputOrigin": "actual browser UI downloads",
+  "checks": [
+    {
+      "mode": "joined",
+      "phase": "loaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS"
+    },
+    {
+      "mode": "joined",
+      "phase": "reloaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS"
+    },
+    {
+      "mode": "reversed",
+      "phase": "loaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS"
+    },
+    {
+      "mode": "reversed",
+      "phase": "reloaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS"
+    },
+    {
+      "mode": "cleared",
+      "phase": "loaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS"
+    },
+    {
+      "mode": "cleared",
+      "phase": "reloaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS"
+    },
+    {
+      "mode": "resaved-inputs",
+      "phase": "loaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS"
+    },
+    {
+      "mode": "resaved-inputs",
+      "phase": "reloaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS"
+    },
+    {
+      "mode": "duplicate",
+      "phase": "loaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS",
+      "positiveOracleRejected": true,
+      "rejectionReason": "Literal marker set mismatch"
+    },
+    {
+      "mode": "duplicate",
+      "phase": "reloaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS",
+      "positiveOracleRejected": true,
+      "rejectionReason": "Literal marker set mismatch"
+    },
+    {
+      "mode": "wrong-color",
+      "phase": "loaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS",
+      "positiveOracleRejected": true,
+      "rejectionReason": "('Foreground/alpha', 6, {'anchor': False, 'background': '#fffff080', 'family': 'DejaVu Sans', 'foreground': '#ff008800', 'href': '', 'italic': True, 'names': [], 'overline': False, 'position': 6, 'resolvedFamily': 'DejaVu Sans', 'strike': False, 'text': 'café', 'underline': False, 'weight': 700})"
+    },
+    {
+      "mode": "wrong-color",
+      "phase": "reloaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS",
+      "positiveOracleRejected": true,
+      "rejectionReason": "('Foreground/alpha', 6, {'anchor': False, 'background': '#fffff080', 'family': 'DejaVu Sans', 'foreground': '#ff008800', 'href': '', 'italic': True, 'names': [], 'overline': False, 'position': 6, 'resolvedFamily': 'DejaVu Sans', 'strike': False, 'text': 'café', 'underline': False, 'weight': 700})"
+    },
+    {
+      "mode": "wrong-text",
+      "phase": "loaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS",
+      "positiveOracleRejected": true,
+      "rejectionReason": "Literal Unicode text mismatch"
+    },
+    {
+      "mode": "wrong-text",
+      "phase": "reloaded",
+      "literalNativeTextStyleCuesAndKeySearch": "PASS",
+      "positiveOracleRejected": true,
+      "rejectionReason": "Literal Unicode text mismatch"
+    }
+  ],
+  "sourceFilesByteUnchanged": true,
+  "negativeInputsAreExactSingleFaults": true,
+  "duplicateControl": "Two key65 markers remain; native keySearch65 always returns the first at14 from all four tested cursor positions",
+  "remappedControl": "Native keySearch65 returns14 and keySearch66 returns44, including fresh process after native save",
+  "normalizationCaveat": "Native save may split anchors and remove residual href from non-anchor continuations; text/style/cue semantics, not whole snapshots, are asserted",
+  "inputSHA256": [
+    "f7126d461efadbc617638923c315cb8893a2ea73b9715eb4766fe84bc42f57cc",
+    "d08f8adeacaae148680b92b207c51997663ff46e658ea5e131e228f3713a22de"
+  ],
+  "joinedSHA256": "c9587c329522aec6a423e76f311eaddf3056695e366c596e28f964a9c6b417e4"
+}

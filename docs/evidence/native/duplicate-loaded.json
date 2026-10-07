@@ -1,0 +1,283 @@
+{
+    "documentClass": "QQuickTextDocument",
+    "fragments": [
+        {
+            "anchor": false,
+            "background": "",
+            "family": "DejaVu Sans",
+            "foreground": "#ff203040",
+            "href": "",
+            "italic": false,
+            "names": [
+            ],
+            "overline": false,
+            "position": 0,
+            "resolvedFamily": "DejaVu Sans",
+            "strike": false,
+            "text": "Alpha ",
+            "underline": false,
+            "weight": 400
+        },
+        {
+            "anchor": false,
+            "background": "#fffff080",
+            "family": "DejaVu Sans",
+            "foreground": "#ffcc2244",
+            "href": "",
+            "italic": true,
+            "names": [
+            ],
+            "overline": false,
+            "position": 6,
+            "resolvedFamily": "DejaVu Sans",
+            "strike": false,
+            "text": "café",
+            "underline": false,
+            "weight": 700
+        },
+        {
+            "anchor": false,
+            "background": "",
+            "family": "DejaVu Sans",
+            "foreground": "#ff203040",
+            "href": "",
+            "italic": false,
+            "names": [
+            ],
+            "overline": false,
+            "position": 10,
+            "resolvedFamily": "DejaVu Sans",
+            "strike": false,
+            "text": " 🌟",
+            "underline": false,
+            "weight": 400
+        },
+        {
+            "anchor": true,
+            "background": "#00000000",
+            "family": "DejaVu Sans",
+            "foreground": "#ff203040",
+            "href": "#",
+            "italic": false,
+            "names": [
+                "key_65"
+            ],
+            "overline": true,
+            "position": 14,
+            "resolvedFamily": "DejaVu Sans",
+            "strike": false,
+            "text": "C",
+            "underline": true,
+            "weight": 400
+        },
+        {
+            "anchor": false,
+            "background": "#00000000",
+            "family": "DejaVu Sans",
+            "foreground": "#ff203040",
+            "href": "#",
+            "italic": false,
+            "names": [
+            ],
+            "overline": true,
+            "position": 15,
+            "resolvedFamily": "DejaVu Sans",
+            "strike": false,
+            "text": "ue one",
+            "underline": true,
+            "weight": 400
+        },
+        {
+            "anchor": true,
+            "background": "#00000000",
+            "family": "DejaVu Sans",
+            "foreground": "#ff203040",
+            "href": "#",
+            "italic": false,
+            "names": [
+            ],
+            "overline": true,
+            "position": 22,
+            "resolvedFamily": "DejaVu Sans",
+            "strike": false,
+            "text": "Local A",
+            "underline": true,
+            "weight": 400
+        },
+        {
+            "anchor": false,
+            "background": "",
+            "family": "DejaVu Sans",
+            "foreground": "#ff203040",
+            "href": "",
+            "italic": false,
+            "names": [
+            ],
+            "overline": false,
+            "position": 30,
+            "resolvedFamily": "DejaVu Sans",
+            "strike": false,
+            "text": "End A",
+            "underline": false,
+            "weight": 400
+        },
+        {
+            "anchor": false,
+            "background": "",
+            "family": "DejaVu Serif",
+            "foreground": "#ff405060",
+            "href": "",
+            "italic": true,
+            "names": [
+            ],
+            "overline": false,
+            "position": 36,
+            "resolvedFamily": "DejaVu Serif",
+            "strike": false,
+            "text": "Beta ",
+            "underline": false,
+            "weight": 600
+        },
+        {
+            "anchor": false,
+            "background": "#ffaaffcc",
+            "family": "DejaVu Serif",
+            "foreground": "#ff1266aa",
+            "href": "",
+            "italic": false,
+            "names": [
+            ],
+            "overline": false,
+            "position": 41,
+            "resolvedFamily": "DejaVu Serif",
+            "strike": false,
+            "text": "東京",
+            "underline": false,
+            "weight": 700
+        },
+        {
+            "anchor": true,
+            "background": "#00000000",
+            "family": "DejaVu Serif",
+            "foreground": "#ff405060",
+            "href": "#",
+            "italic": true,
+            "names": [
+                "key_65"
+            ],
+            "overline": true,
+            "position": 44,
+            "resolvedFamily": "DejaVu Serif",
+            "strike": false,
+            "text": "C",
+            "underline": true,
+            "weight": 600
+        },
+        {
+            "anchor": false,
+            "background": "#00000000",
+            "family": "DejaVu Serif",
+            "foreground": "#ff405060",
+            "href": "#",
+            "italic": true,
+            "names": [
+            ],
+            "overline": true,
+            "position": 45,
+            "resolvedFamily": "DejaVu Serif",
+            "strike": false,
+            "text": "ue two",
+            "underline": true,
+            "weight": 600
+        },
+        {
+            "anchor": true,
+            "background": "#00000000",
+            "family": "DejaVu Serif",
+            "foreground": "#ff405060",
+            "href": "#",
+            "italic": true,
+            "names": [
+            ],
+            "overline": true,
+            "position": 52,
+            "resolvedFamily": "DejaVu Serif",
+            "strike": false,
+            "text": "Local B",
+            "underline": true,
+            "weight": 600
+        },
+        {
+            "anchor": false,
+            "background": "",
+            "family": "DejaVu Serif",
+            "foreground": "#ff405060",
+            "href": "",
+            "italic": true,
+            "names": [
+            ],
+            "overline": false,
+            "position": 60,
+            "resolvedFamily": "DejaVu Serif",
+            "strike": false,
+            "text": "End B",
+            "underline": false,
+            "weight": 600
+        }
+    ],
+    "keySearch": [
+        {
+            "cursor": -1,
+            "key65": 14,
+            "key66": -1
+        },
+        {
+            "cursor": 0,
+            "key65": 14,
+            "key66": -1
+        },
+        {
+            "cursor": 15,
+            "key65": 14,
+            "key66": -1
+        },
+        {
+            "cursor": 1000,
+            "key65": 14,
+            "key66": -1
+        }
+    ],
+    "markers": [
+        {
+            "href": "#",
+            "key": 65,
+            "position": 14,
+            "requestType": 0,
+            "text": "Cue one"
+        },
+        {
+            "href": "#",
+            "key": 0,
+            "position": 22,
+            "requestType": 0,
+            "text": "Local A"
+        },
+        {
+            "href": "#",
+            "key": 65,
+            "position": 44,
+            "requestType": 0,
+            "text": "Cue two"
+        },
+        {
+            "href": "#",
+            "key": 0,
+            "position": 52,
+            "requestType": 0,
+            "text": "Local B"
+        }
+    ],
+    "qtVersion": "6.8.2",
+    "realQmlEngine": true,
+    "text": "Alpha café 🌟\nCue one\nLocal A\nEnd A\nBeta 東京\nCue two\nLocal B\nEnd B"
+}

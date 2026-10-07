@@ -1,0 +1,31 @@
+{
+  "origin": "Five actual sandboxed browser UI downloads; no prototype output replacement",
+  "testedHTMLSHA256": "0bc2c57f936497a689470ef5088edad5b31ff969e9fadcdccc1eeaac19619634",
+  "files": [
+    {
+      "mode": "joined",
+      "bytes": 2268,
+      "sha256": "c9587c329522aec6a423e76f311eaddf3056695e366c596e28f964a9c6b417e4"
+    },
+    {
+      "mode": "reversed",
+      "bytes": 2268,
+      "sha256": "ab808afee4ca3e0cc0ad91c360117c6c91809d06a9b67e7c05f53a225c5590fa"
+    },
+    {
+      "mode": "cleared",
+      "bytes": 2247,
+      "sha256": "c2485a25df954d48887ad0e7b1e48f9e218a9cd14cc2426d5149daf35242d6fb"
+    },
+    {
+      "mode": "resaved-inputs",
+      "bytes": 2384,
+      "sha256": "38edbd8a760ccd3ed02318b4f286b3ef072d8128572f229355bb445f9ccff533"
+    },
+    {
+      "mode": "duplicate",
+      "bytes": 2268,
+      "sha256": "30538e616ac85c598a29e2bf0f0cf3c9e9107d694e80cc81505ff04614f6e8e9"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "beforeExecution": true,
+  "releaseTag": "v2.0.2",
+  "sourceCommit": "2a2f821eaa98eeae4996121c1df34e24ed6be3aa",
+  "officialAsset": {
+    "name": "QPrompt-2.0.2-x86_64-Linux.deb",
+    "url": "https://github.com/Cuperino/QPrompt-Teleprompter/releases/download/v2.0.2/QPrompt-2.0.2-x86_64-Linux.deb",
+    "bytes": 18209072,
+    "sha256": "4e6c215cecc543d45b2504a48a2131939fc9093dd4e130f214c153688ab6bfc7"
+  },
+  "sourceFiles": [
+    {
+      "path": "src/documenthandler.cpp",
+      "bytes": 52942,
+      "sha256": "df95319c7ea0e8dcd2fb12a3d8e2f8534e7233a26c7ea94cf711a0162d3dc3ae",
+      "gitBlobSHA": "4cdbe82f4ae65642f5f439d396dbf1299e7ed265"
+    },
+    {
+      "path": "src/documenthandler.h",
+      "bytes": 11373,
+      "sha256": "5ed8c94cf0708ac07a3082069f16c72f086847e2605dab822142cc5e86e1b045",
+      "gitBlobSHA": "edb3e3229adb6c04a2d26d96a7b6e7030904749b"
+    },
+    {
+      "path": "src/marker.hpp",
+      "bytes": 1550,
+      "sha256": "840b8c18f31681702fa8c1ba15b858a633bfe27d0e0616e4b816150046aa35de",
+      "gitBlobSHA": "bfa3dc6ea631f3f7a620af94e7b1c725dd035de5"
+    },
+    {
+      "path": "src/markersmodel.cpp",
+      "bytes": 7715,
+      "sha256": "81748e2c270d1b42b7293257ffa10ffd35eae414cc6074294756547cdeb887cc",
+      "gitBlobSHA": "94463eef9d0121277bebe0b9050a7446b5858b21"
+    },
+    {
+      "path": "src/markersmodel.h",
+      "bytes": 2623,
+      "sha256": "27f5f0f108e977562e891fa45c2505a27f8c5e58baddd42f779aafc3c96df55f",
+      "gitBlobSHA": "7e0b7e174d122a517d4e866a52eb8cbdd5f270b5"
+    },
+    {
+      "path": "src/systemfontchooserdialog.cpp",
+      "bytes": 2155,
+      "sha256": "00c96b4effe1c9d31fa2d26d5dbe29ca7c3363be29e19958c8be2c7465549a37",
+      "gitBlobSHA": "e19d7e6c956d087cac2ca240fe233d596310a15f"
+    },
+    {
+      "path": "src/systemfontchooserdialog.h",
+      "bytes": 1566,
+      "sha256": "e3bea04d0b0790f5cd09b83a855669cb08b62430da3acab0893ff6703e754c6c",
+      "gitBlobSHA": "4dd2d351e2d5600a3fadd44491510948f0974d8c"
+    },
+    {
+      "path": "src/systemfontchooserdialog.ui",
+      "bytes": 2968,
+      "sha256": "2fa82a17c937d91703a052cff5bee94b1ee359fbc6e0bbbeeb16ed71359fd75f",
+      "gitBlobSHA": "113b465de1d638f87e645f2b6242c4f2aca18119"
+    }
+  ],
+  "allUpstreamBytesUnchanged": true
+}

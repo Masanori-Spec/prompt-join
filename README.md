@@ -1,9 +1,13 @@
 # PromptJoin
 
-An offline joiner of supported QPrompt-native HTML scripts. The source/API
-joining gate has passed, including native save/reload and intentional faults.
-The standalone UI in `dist/prompt-join.html` is a candidate awaiting its own
-actual-browser-download and visual/native acceptance.
+An offline Japanese/English joiner of supported QPrompt-native HTML scripts.
+Choose the reading order, review repeated shortcuts, and save a joined HTML copy
+with a hash and decision receipt. Open [the standalone file](dist/prompt-join.html)
+locally. It works without a server or account.
+
+The actual browser downloads have passed the official QPrompt 2.0.2 component
+gate, including native save/fresh reload and intentional faults. See the
+[verified release and retained evidence](docs/release.md).
 
 The first hosted gate checks the official QPrompt 2.0.2 Debian package and a small
 harness that compiles its unchanged DocumentHandler, MarkersModel and font-dialog
@@ -18,7 +22,7 @@ remap it, clear only its shortcut, or explicitly retain the duplicate with a
 receipt warning. Ordinary local cues remain. Supported shortcuts are ASCII
 digits and uppercase A–Z. There is no automatic allocation or guessed intent.
 
-The hosted joining gate sends actual core output through the original native
+The hosted browser joining gate sends five actual HTML downloads through the original native
 load/parse/keySearch/save methods and a fresh process. It checks both file orders,
 distinct A/B shortcuts and shortcut clearing. The duplicate-key control must
 exhibit QPrompt's real first-match ambiguity. Separately corrupted text and color
@@ -56,7 +60,7 @@ Upstream ownership and license information is recorded in
 The parser dependencies' existing notices are retained separately in
 [third-party notices](docs/third-party-notices.txt).
 
-## Offline UI candidate
+## Offline use
 
 Open `dist/prompt-join.html` locally, choose all input scripts, arrange their
 reading order and confirm it. Review each repeated shortcut explicitly. Remap,
@@ -64,9 +68,13 @@ clear or retain it; retained duplicates show the native first-match warning.
 The preview uses only text nodes and validated styles. No imported HTML is
 executed or fetched. Save a new HTML copy and its hash/decision receipt.
 
-Japanese/English, keyboard order controls, mobile cue-table scrolling, print
-review, bounded previews, stale async cancellation and clean offline reopening
-are covered by the new hosted browser test plan. Those runtime/visual results
-remain pending until its workflow passes. All five actual browser HTML downloads
-are then passed unchanged to the same native loader/save/fresh-reload gate;
-the prototype generator does not replace them. The UI has a 100-cue review limit.
+Thirty-five hosted browser cases passed, including Japanese/English, keyboard
+order controls, mobile cue-table scrolling, print review, bounded previews,
+stale async cancellation and clean offline reopening. Desktop, 320/390-pixel
+mobile views, warning/error states and both one-page printed reviews were
+independently inspected. All five actual browser HTML downloads passed unchanged
+to the same native loader/save/fresh-reload gate. The UI has a 100-cue review limit.
+
+This is a supported-fixture compatibility result through unchanged upstream
+components and real Qt Quick objects. It is not a desktop QPrompt GUI test or a
+claim that arbitrary HTML, fonts, layouts or QPrompt versions are supported.

@@ -1,0 +1,218 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "name": "Offline Japanese start has no scripts or automatic order approval",
+      "passed": true
+    },
+    {
+      "name": "Keyboard skip and real file chooser retain explicit order confirmation",
+      "passed": true
+    },
+    {
+      "name": "Every repeated key requires a decision; remap produces exact Unicode-aware positions",
+      "passed": true
+    },
+    {
+      "name": "Actual keyboard HTML download matches accepted native bytes and complete receipt hashes",
+      "passed": true,
+      "bytes": 2268,
+      "sha256": "c9587c329522aec6a423e76f311eaddf3056695e366c596e28f964a9c6b417e4",
+      "receiptSHA256": "c983a579f6552ea0792b7968b8c38fb4c63e71f76807b9bb65883d971c78d7aa"
+    },
+    {
+      "name": "Language switch preserves reviewed order, decisions and valid receipt",
+      "passed": true
+    },
+    {
+      "name": "Color/emphasis preview and canvas change leave export semantics intact",
+      "passed": true
+    },
+    {
+      "name": "Native cue positions remain reachable at ja 390px",
+      "passed": true,
+      "left": 39,
+      "right": 351,
+      "cellLeft": 223.140625,
+      "cellRight": 351,
+      "scroll": 288
+    },
+    {
+      "name": "Native cue positions remain reachable at ja 320px",
+      "passed": true,
+      "left": 27,
+      "right": 293,
+      "cellLeft": 165.140625,
+      "cellRight": 293,
+      "scroll": 334
+    },
+    {
+      "name": "Native cue positions remain reachable at en 390px",
+      "passed": true,
+      "left": 39,
+      "right": 351,
+      "cellLeft": 218.15625,
+      "cellRight": 351,
+      "scroll": 288
+    },
+    {
+      "name": "Native cue positions remain reachable at en 320px",
+      "passed": true,
+      "left": 27,
+      "right": 293,
+      "cellLeft": 160.15625,
+      "cellRight": 293,
+      "scroll": 334
+    },
+    {
+      "name": "Both printed reviews include all source identities, cue labels and output hash",
+      "passed": true
+    },
+    {
+      "name": "Dispatched empty file-change event preserves a valid review",
+      "passed": true
+    },
+    {
+      "name": "Keyboard reordering invalidates prior approval and maps reversed positions exactly",
+      "passed": true
+    },
+    {
+      "name": "Clearing a shortcut keeps its ordinary local cue and exact position",
+      "passed": true
+    },
+    {
+      "name": "Explicit duplicate retention warns about native first-match behavior and records the choice",
+      "passed": true
+    },
+    {
+      "name": "Actual native-saved first-character anchors remain complete cues through the UI",
+      "passed": true
+    },
+    {
+      "name": "A remap introducing a collision blocks export and stale receipts",
+      "passed": true
+    },
+    {
+      "name": "Removing a script invalidates order, decisions and export below the two-file minimum",
+      "passed": true
+    },
+    {
+      "name": "generic input fails closed with no stale review",
+      "passed": true
+    },
+    {
+      "name": "external input fails closed with no stale review",
+      "passed": true
+    },
+    {
+      "name": "automation input fails closed with no stale review",
+      "passed": true
+    },
+    {
+      "name": "script input fails closed with no stale review",
+      "passed": true
+    },
+    {
+      "name": "nested input fails closed with no stale review",
+      "passed": true
+    },
+    {
+      "name": "empty cue input fails closed with no stale review",
+      "passed": true
+    },
+    {
+      "name": "encoding input fails closed with no stale review",
+      "passed": true
+    },
+    {
+      "name": "Office documents are rejected before parsing",
+      "passed": true
+    },
+    {
+      "name": "Oversized files are blocked before their contents are parsed",
+      "passed": true
+    },
+    {
+      "name": "UI cue-count bounds block oversized review tables",
+      "passed": true
+    },
+    {
+      "name": "Imported filenames render as inert text",
+      "passed": true
+    },
+    {
+      "name": "Long previews are explicitly bounded while the full supported output remains available",
+      "passed": true
+    },
+    {
+      "name": "A late file read cannot replace a newer sample",
+      "passed": true
+    },
+    {
+      "name": "Clear invalidates pending file reads",
+      "passed": true
+    },
+    {
+      "name": "Reordering during hashing cancels a stale HTML download",
+      "passed": true
+    },
+    {
+      "name": "Repeated exports are byte deterministic",
+      "passed": true
+    },
+    {
+      "name": "Saved offline HTML reopens clean without imported data or previous decisions",
+      "passed": true
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "networkRequests": [],
+  "screenshots": [
+    "01-ja-empty-desktop.png",
+    "02-ja-joined-desktop.png",
+    "03-en-joined-desktop.png",
+    "04-ja-mobile-390.png",
+    "04-ja-mobile-390-positions.png",
+    "04-ja-mobile-320.png",
+    "04-ja-mobile-320-positions.png",
+    "04-en-mobile-390.png",
+    "04-en-mobile-390-positions.png",
+    "04-en-mobile-320.png",
+    "04-en-mobile-320-positions.png",
+    "05-en-retained-warning.png",
+    "06-en-blocked-input.png"
+  ],
+  "shippedHTMLSHA256": "0bc2c57f936497a689470ef5088edad5b31ff969e9fadcdccc1eeaac19619634",
+  "downloads": {
+    "joined": {
+      "bytes": 2268,
+      "sha256": "c9587c329522aec6a423e76f311eaddf3056695e366c596e28f964a9c6b417e4",
+      "receiptSHA256": "c983a579f6552ea0792b7968b8c38fb4c63e71f76807b9bb65883d971c78d7aa"
+    },
+    "reversed": {
+      "bytes": 2268,
+      "sha256": "ab808afee4ca3e0cc0ad91c360117c6c91809d06a9b67e7c05f53a225c5590fa",
+      "receiptSHA256": "762e5f751a6f09426e14fa101419c43b10d3b619bdd4b24c1f4569f6f1e53774"
+    },
+    "cleared": {
+      "bytes": 2247,
+      "sha256": "c2485a25df954d48887ad0e7b1e48f9e218a9cd14cc2426d5149daf35242d6fb",
+      "receiptSHA256": "fcfd44b49597b430e1d39fe8c668809f84ba8022ee6fb09a0a9a75af3cf2453e"
+    },
+    "duplicate": {
+      "bytes": 2268,
+      "sha256": "30538e616ac85c598a29e2bf0f0cf3c9e9107d694e80cc81505ff04614f6e8e9",
+      "receiptSHA256": "a40c77227da1ed7b674ba8d389cbbc0003c0b0b07ce8923eea197eb93dbc95ca"
+    },
+    "resaved-inputs": {
+      "bytes": 2384,
+      "sha256": "38edbd8a760ccd3ed02318b4f286b3ef072d8128572f229355bb445f9ccff533",
+      "receiptSHA256": "bed06a582d93cca485756890c3da93d86f9fab56587e7dad026311a3bc42c420"
+    }
+  },
+  "browserVersion": "154.0.8037.97",
+  "chromiumMainProcessCommands": [
+    "/usr/bin/google-chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AcceptCHFrame,AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --user-data-dir=/tmp/playwright_chromiumdev_profile-jHz0O6 --remote-debugging-pipe --no-startup-window"
+  ]
+}
